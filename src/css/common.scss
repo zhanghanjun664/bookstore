@@ -1,0 +1,126 @@
+@function rem($flexible) {
+    @if $flexible !=0 {
+        $flexible: $flexible/750*10+rem;
+    }
+    @return $flexible;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-size: rem(30);
+}
+html,body{
+    color: #666666;
+    font-weight: normal;
+    font-family: "微软雅黑";
+}
+
+//toast
+.toast{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    line-height: 1.5;
+    display: none;
+}
+.toast_value{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,.6);
+    color: #fff;
+    text-align: center;
+    padding: rem(50);
+    width: 50%;
+    border-radius: 10px;
+    font-size: rem(30);
+}
+
+//提示框
+.modal_container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.6);
+    z-index: 999;
+    display: none;
+}
+.modal_box{
+    width: 80%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin: auto;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    padding: rem(66) rem(30) 0;
+}
+.modal_title{
+    margin: 0 0 rem(42);
+    font-size: rem(36) ;
+}
+.modal_content{
+    font-size: rem(30);
+    margin-bottom: rem(50);
+    line-height: 1.5;
+}
+
+.modal_footer{ 
+    display: flex;
+    border-top: 1px solid #f2f2f2;
+    line-height: 100px;
+    font-size: rem(36);
+}
+.modal_cancel{
+    flex: 1;
+    border-right: 1px solid #f2f2f2;
+}
+.modal_submit{
+    flex: 1;
+    color: #2490eb;
+}
+
+
+//header
+#headNav{
+    display: flex;
+    align-items: center;
+    background-color: #10aeff;
+    height: rem(90);
+    color: #fff;
+}
+#headNav img{
+    width: rem(36);
+    margin-right: rem(6);
+}
+.hn_box{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hn_box > div{
+    flex: 1;
+    text-align: center;
+    border-left: 1px solid #88d7ff;
+}
+.go_free{
+    border-right: 1px solid #88d7ff;
+}
+.headNav_left,.headNav_right{
+    width: rem(160);
+    text-align: center;
+}
