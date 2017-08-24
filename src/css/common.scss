@@ -124,3 +124,15 @@ html,body{
     width: rem(160);
     text-align: center;
 }
+
+//按钮
+.btn{
+    width: 100%;
+    background-color: #10AEFF;
+    color: #fff;
+    line-height: rem(80);
+    border-radius: rem(10);
+    font-size: rem(34);
+    border: none;
+    letter-spacing: rem(2);
+}

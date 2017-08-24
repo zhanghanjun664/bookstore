@@ -109,3 +109,13 @@ html, body {
 .headNav_left, .headNav_right {
   width: 2.13333rem;
   text-align: center; }
+
+.btn {
+  width: 100%;
+  background-color: #10AEFF;
+  color: #fff;
+  line-height: 1.06667rem;
+  border-radius: 0.13333rem;
+  font-size: 0.45333rem;
+  border: none;
+  letter-spacing: 0.02667rem; }
