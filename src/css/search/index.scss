@@ -90,6 +90,7 @@ html,body{
     right: rem(20);
     top: 50%;
     transform: translateY(-50%);
+    display: none;
 }
 
 .part2_1_title{
@@ -151,4 +152,8 @@ html,body{
 }
 .p3_item_d{
     line-height: 1.6;
+}
+
+.part4{
+    display: none;
 }

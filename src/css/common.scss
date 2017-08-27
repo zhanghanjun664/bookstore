@@ -136,3 +136,11 @@ html,body{
     border: none;
     letter-spacing: rem(2);
 }
+
+//输入框提示样式
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #bdbdbd;
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: #bdbdbd;
+}

@@ -119,3 +119,9 @@ html, body {
   font-size: 0.45333rem;
   border: none;
   letter-spacing: 0.02667rem; }
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #bdbdbd; }
+
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: #bdbdbd; }

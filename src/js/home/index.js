@@ -1,3 +1,47 @@
+var bannerDemo = $(".swiper-slide").clone();
+$(".swiper-slide").remove();
+var dataBannerList = [
+  {
+    src: "../../img/test.jpg",
+    title: "标题a",
+    content: "内容",
+    id: "1"
+  },
+  {
+    src: "../../img/test.jpg",
+    title: "标题",
+    content: "内容b",
+    id: "2"
+  },
+  {
+    src: "../../img/test.jpg",
+    title: "标题c",
+    content: "内容",
+    id: "3"
+  },
+  {
+    src: "../../img/test.jpg",
+    title: "标题d",
+    content: "内容",
+    id: "4"
+  },
+  {
+    src: "../../img/test.jpg",
+    title: "标题e",
+    content: "内容",
+    id: "5"
+  }
+]
+dataBannerList.forEach(function(item,index){
+  var demo = bannerDemo.clone();
+  demo.attr("id",item.id);
+  demo.find(".banner_a").attr("src",item.src);
+  demo.find(".banner_c").text(item.title);
+  demo.find(".banner_d").text(item.content) ;
+  $(".swiper-wrapper").append(demo)
+})
+
+
 new Swiper('#banner', {
   autoplay: 4000,
   speed: 600,
@@ -5,6 +49,10 @@ new Swiper('#banner', {
   pagination: '.swiper-pagination',
 
 })
+
+
+
+
 
 //倒计时
 function leftTimer(year, month, day, hour, minute, second) { 
@@ -53,3 +101,8 @@ function show() {
   console.log()
 }
 setInterval(show, 1000)
+
+$("#banner").on("click", ".swiper-slide", function(){
+  var id = $(this).attr("id");
+  location.href = "../common/cover.html?id="+id
+})

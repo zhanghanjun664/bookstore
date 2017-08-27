@@ -54,7 +54,9 @@ html, body {
   margin: 0 0.26667rem; }
 
 .p4_nav {
-  width: 0.8rem; }
+  width: 0.8rem;
+  -webkit-user-select: none;
+  user-select: none; }
 
 .p4_nav > img {
   width: 100%; }
@@ -65,7 +67,8 @@ html, body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   top: 0;
-  left: 0; }
+  left: 0;
+  display: none; }
 
 .p5_box {
   position: absolute;

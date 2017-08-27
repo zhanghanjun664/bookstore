@@ -65,6 +65,8 @@ html,body{
 }
 .p4_nav{
     width: rem(60);
+    -webkit-user-select: none;
+    user-select: none;
 }
 .p4_nav > img{
     width: 100%;
@@ -77,6 +79,7 @@ html,body{
     background-color: rgba(0,0,0,.5);
     top: 0;
     left: 0;
+    display: none;
 }
 .p5_box{
     position: absolute;
