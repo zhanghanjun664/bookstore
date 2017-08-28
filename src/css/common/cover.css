@@ -31,9 +31,10 @@
 .part3 {
   padding: 0.4rem 0.26667rem; }
 
-.p3_a > img {
+.p3_a .p3_a_icon {
   width: 0.4rem;
-  margin-right: 0.08rem; }
+  margin-right: 0.08rem;
+  color: #10AEFF; }
 
 .p3_a > span {
   font-size: 0.42667rem;

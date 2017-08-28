@@ -89,7 +89,6 @@ function showNav(){
 }
 
 function hideNav(){
-  $(".p5_box").slideUp(100,function(){
-    $(".part5").hide();
-  });
+  $(".p5_box").slideUp(100);
+  $(".part5").fadeOut(100);
 }

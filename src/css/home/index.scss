@@ -205,8 +205,10 @@
 }
 .p8_item_c{
     position: absolute;
-    top: 0;
+    top: rem(-4);
     left: 0;
+    color: #ff4848;
+    font-size: rem(70);
 }
 .p8_item_d{
     width: 7em;

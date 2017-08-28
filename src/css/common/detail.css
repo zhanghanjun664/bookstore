@@ -61,6 +61,9 @@ html, body {
 .p4_nav > img {
   width: 100%; }
 
+.p4_nav > .iconfont {
+  font-size: 0.8rem; }
+
 .part5 {
   position: fixed;
   width: 100%;
