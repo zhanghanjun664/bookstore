@@ -1,54 +1,167 @@
+//首页接口
+ajax({
+	url: REST_PRRFIX + '/api/index/do.json',
+	type:"POST",
+	dataType:"json",
+	success: function(data){
+		console.log(data)
+		var bannerArr = [],recommendArr = [],girlArr = [],girl2Arr = [],boyArr = [],boy2Arr = [];
+		data.data.list.forEach(function(item){
+			if(item.indexSpread == 1){
+				bannerArr.push(item)
+			}
+			if(item.indexSpread == 2){
+				recommendArr.push(item)
+			}
+			if(item.indexSpread == 3){
+				girlArr.push(item)
+			}
+			if(item.indexSpread == 4){
+				girl2Arr.push(item)
+			}
+			if(item.indexSpread == 5){
+				boyArr.push(item)
+			}
+			if(item.indexSpread == 6){
+				boy2Arr.push(item)
+			}
+			
+		})
+		console.log(bannerArr,recommendArr,girlArr,girl2Arr,boyArr,boy2Arr)
+		bannerRender(bannerArr)
+		recommendRender(recommendArr)
+		girlRender(girlArr)
+		girl2Render(girl2Arr)
+		boyRender(boyArr)
+		boy2Render(boy2Arr)
+	}
+})
+//限免接口
+ajax({
+	url: REST_PRRFIX + '/api/index/classify.json',
+	type:"POST",
+	dataType:"json",
+	data:{bookTypeId:2,pageSize:6,sexType:0,bookStatusEnd:"",current:0},
+	success: function(data){
+		console.log(data)
+		if(!data.data.list.length){
+			$(".part8").hide();
+		}else{
+			freeRender(data.data.list)			
+		}
+	}
+})
+
+
+
+
+
 var bannerDemo = $(".swiper-slide").clone();
 $(".swiper-slide").remove();
-var dataBannerList = [
-  {
-    src: "../../img/test.jpg",
-    title: "标题a",
-    content: "内容",
-    id: "1"
-  },
-  {
-    src: "../../img/test.jpg",
-    title: "标题",
-    content: "内容b",
-    id: "2"
-  },
-  {
-    src: "../../img/test.jpg",
-    title: "标题c",
-    content: "内容",
-    id: "3"
-  },
-  {
-    src: "../../img/test.jpg",
-    title: "标题d",
-    content: "内容",
-    id: "4"
-  },
-  {
-    src: "../../img/test.jpg",
-    title: "标题e",
-    content: "内容",
-    id: "5"
-  }
-]
-dataBannerList.forEach(function(item,index){
-  var demo = bannerDemo.clone();
-  demo.attr("id",item.id);
-  demo.find(".banner_a").attr("src",item.src);
-  demo.find(".banner_c").text(item.title);
-  demo.find(".banner_d").text(item.content) ;
-  $(".swiper-wrapper").append(demo)
-})
+//banner
+function bannerRender(data){
+	data.forEach(function(item,index){
+	  var demo = bannerDemo.clone();
+	  demo.attr("data-id",item.bookTypeId);
+	  demo.find(".banner_a").attr("src",URL_PREFIX+item.coverUrl);
+	  demo.find(".banner_c").text(item.title);
+	  demo.find(".banner_d").text(showSize(item.context,50)) ;
+	  $(".swiper-wrapper").append(demo)
+	})
+	
+	
+	new Swiper('#banner', {
+	  autoplay: 4000,
+	  speed: 600,
+	  // 如果需要分页器
+	  pagination: '.swiper-pagination',
+	
+	})
+}
+//主编力荐
+function recommendRender(data){
+	data.forEach(function(item,index){
+		if(index<3){
+			$(".p3_item").eq(index).attr("data-id", item.bookTypeId);
+			$(".p3_item").eq(index).find("img").attr("src",URL_PREFIX+item.coverUrl);
+			$(".p3_item").eq(index).find("div").text(item.title);
+		}else{
+			$(".p3_list li").eq(index-3).text(item.title).attr("data-id", item.bookTypeId);
+		}
+		
+	})
+}
+
+//女1
+function girlRender(data){
+	data.forEach(function(item,index){
+		if(index<1){
+			$(".part4 .p4_box").attr("data-id", item.bookTypeId);
+			$(".part4 .p4_box_a img").attr("src", URL_PREFIX+item.coverUrl);
+			$(".part4 .p4_box_c").text(item.title);
+			$(".part4 .p4_box_d").text(showSize(item.context,55));
+		}else{
+			$(".part4 .p3_list li").eq(index-1).text(item.title).attr("data-id", item.bookTypeId);
+		}
+		
+	})
+}
+
+//女2
+function girl2Render(data){
+	data.forEach(function(item,index){
+		if(index<1){
+			$(".part5 .p4_box").attr("data-id", item.bookTypeId);
+			$(".part5 .p4_box_a img").attr("src", URL_PREFIX+item.coverUrl);
+			$(".part5 .p4_box_c").text(item.title);
+			$(".part5 .p4_box_d").text(showSize(item.context,55));
+		}else{
+			$(".part5 .p3_list li").eq(index-1).text(item.title).attr("data-id", item.bookTypeId);
+		}
+		
+	})
+}
+
+//男1
+function boyRender(data){
+	data.forEach(function(item,index){
+		if(index<1){
+			$(".part6 .p4_box").attr("data-id", item.bookTypeId);
+			$(".part6 .p4_box_a img").attr("src", URL_PREFIX+item.coverUrl);
+			$(".part6 .p4_box_c").text(item.title);
+			$(".part6 .p4_box_d").text(showSize(item.context,55));
+		}else{
+			$(".part6 .p3_list li").eq(index-1).text(item.title).attr("data-id", item.bookTypeId);
+		}
+		
+	})
+}
+
+//男2
+function boy2Render(data){
+	data.forEach(function(item,index){
+		if(index<1){
+			$(".part7 .p4_box").attr("data-id", item.bookTypeId);
+			$(".part7 .p4_box_a img").attr("src", URL_PREFIX+item.coverUrl);
+			$(".part7 .p4_box_c").text(item.title);
+			$(".part7 .p4_box_d").text(showSize(item.context,55));
+		}else{
+			$(".part7 .p3_list li").eq(index-1).text(item.title).attr("data-id", item.bookTypeId);
+		}
+		
+	})
+}
+
+//限免
+function freeRender(data){
+	data.forEach(function(item,index){
+		$(".p8_item").eq(index).attr("data-id", item.bookTypeId)
+		$(".p8_item").eq(index).find(".p8_item_b").attr("src", URL_PREFIX+item.coverUrl)
+		$(".p8_item").eq(index).find(".p8_item_b").text(item.title)
+	})
+}
 
 
-new Swiper('#banner', {
-  autoplay: 4000,
-  speed: 600,
-  // 如果需要分页器
-  pagination: '.swiper-pagination',
-
-})
 
 
 
@@ -102,7 +215,14 @@ function show() {
 }
 setInterval(show, 1000)
 
+//banner跳转
 $("#banner").on("click", ".swiper-slide", function(){
-  var id = $(this).attr("id");
+  var id = $(this).attr("data-id");
+  location.href = "../common/cover.html?id="+id
+})
+
+//列表跳转
+$(".p3_list li,.p4_box,.p3_item,.p8_item").on("click", function(){
+	var id = $(this).attr("data-id");
   location.href = "../common/cover.html?id="+id
 })

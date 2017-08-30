@@ -46,6 +46,12 @@
     text-align: center;
     line-height: 1.5;
 }
+.p3_box > .active{
+    border: rem(2) solid #fe981b;
+}
+.p3_box > .active > div{
+    color: #fe981b!important;
+}
 .p3_box > div > div{
     font-size: rem(28);
     color: #999999;

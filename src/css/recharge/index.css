@@ -38,6 +38,12 @@
   text-align: center;
   line-height: 1.5; }
 
+.p3_box > .active {
+  border: 0.02667rem solid #fe981b; }
+
+.p3_box > .active > div {
+  color: #fe981b !important; }
+
 .p3_box > div > div {
   font-size: 0.37333rem;
   color: #999999; }

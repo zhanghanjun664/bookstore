@@ -42,8 +42,9 @@ html,body{
     list-style: none;
     text-indent: 2em;
     line-height: 1.6;
+    padding-bottom: rem(40);
 }
-.p3_box > li{
+.p3_box > p{
     margin-bottom: rem(20);
 }
 

@@ -54,6 +54,7 @@
 }
 .p3_b{
     line-height: 1.5;
+//  font-size: rem(30);
 }
 
 .part4{
@@ -80,6 +81,12 @@
     padding-left: rem(20);
     line-height: rem(80);
     border-bottom: rem(2) solid #eeeeee;
+}
+.part5_box span{
+    color: #ff73b9;
+}
+.part5_box .iconfont{
+    margin-left: rem(20);
 }
 .part5_catalog{
     line-height: rem(80);

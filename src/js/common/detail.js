@@ -1,13 +1,67 @@
+var id = GetQueryString("id");
+var chapterId = GetQueryString("chapterId");
+var length = GetQueryString("length");
+var xsStyle = "";
+if(!localStorage.getItem("xsStyle")){
+	xsStyle = {
+		fontSize: "0.4rem",
+		backgroundColor: "initial"
+	}
+}else{
+	xsStyle = JSON.parse(localStorage.getItem("xsStyle"));
+}
+console.log(xsStyle)
+$(".wrap").css("background-color",xsStyle.backgroundColor);
+setTimeout(function(){
+	$(".p3_box p").css("font-size",xsStyle.fontSize);
+},100)
+
+ajax({
+	type: 'POST',
+	url: REST_PRRFIX + '/api/index/chapter/context.json',
+	data:{userId: userId, bookId: id, chapterId: chapterId},
+	dataType:"json",
+	success:function(data){
+		console.log(data)
+		$(".part1").text("第"+data.data.chapter.chapterId+"章："+data.data.chapter.chapterName)
+		$(".part2 > img").attr("src", URL_PREFIX+data.data.chapter.coverUrl)
+		$(".p3_box").html(data.data.chapter.context)
+		
+		if(chapterId == 1){
+			$(".p4_prev").addClass("hidden");
+		}else if(chapterId == length){
+			$(".p4_next").addClass("hidden");
+		}
+		
+	}
+})
+
+//上一章
+$(".p4_prev").on("click", function(){
+	location.href = 'detail.html?id='+id+"&chapterId="+(Number(chapterId)-1)+"&length="+length
+})
+
+//下一章
+$(".p4_next").on("click", function(){
+	location.href = 'detail.html?id='+id+"&chapterId="+(Number(chapterId)+1)+"&length="+length
+})
+
+
+
 //设置背景色
 $(".p5_modal_background .p5_modal_b > div").on("touchend", function(){
   var color = $(this).attr("data-color");
   $(".wrap").css("background-color",color)
+  xsStyle.backgroundColor = color;
+  localStorage.setItem("xsStyle", JSON.stringify(xsStyle));
 })
 
 //设置字体大小
 $(".p5_modal_fontSize .p5_modal_b > div").on("touchend", function(){
   var size = $(this).attr("data-size");
-  $(".p3_box li").css("font-size",size)
+  $(".p3_box p").css("font-size",size)
+  xsStyle.fontSize = size;
+  localStorage.setItem("xsStyle", JSON.stringify(xsStyle));
 })
 
 //确定
@@ -35,6 +89,7 @@ $(".show_fontsize").click(function(){
       showFontsize()
     },0)
   });
+  
 })
 
 //显示设置背景色

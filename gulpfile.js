@@ -21,8 +21,9 @@ gulp.task('connect', function(){
       return [
         proxy('/rest', {
 //          target: "http://dev.fa.weiduanxian.com/hpApp/",
-          target: 'http://api.hp.weiduanxian.com:7000/hpApp/',//黄埔
-//          target: 'http://10.0.30.121/hpApp/',//李振宁本地
+//        target: 'http://api.hp.weiduanxian.com:7000/hpApp/',//黄埔
+            target: 'http://10.0.30.121/xsManage/',//李振宁本地
+            target: 'http://10.0.30.112:8080/xsManage',//樊华
 //          target: 'http://dev.fa.weiduanxian.com:6001/',
 //          target: 'http://api.hz.weiduanxian.com:7000/',
           changeOrigin: true,

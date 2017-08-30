@@ -100,3 +100,56 @@ $("#headNav").on("touchend", ".headNav_right", function(){
   var urls = a.slice(0, b.index) + "/html/recharge/index.html";
   location.href = urls;
 })
+
+
+var REST_PRRFIX = "/rest";
+function ajax(config) {
+	$.ajax({
+		type: config.type,
+		url: config.url,
+		data: config.data,
+		dataType: config.dataType,
+		async: config.async,
+		success: function(data) {
+			//登录失效
+			if(data.code == 1) {
+				showToast(data.errMsg)
+			} else if(data.code == 0) {
+				config.success(data);
+			}
+		},
+		error: function(data) {
+			typeof config.error == 'function' ? config.error(data) : ""
+		}
+	});
+
+}
+
+
+//多余字数省略号
+function showSize(str,num){
+	return str.slice(0,num)+"..."
+}
+
+function GetQueryString(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+	var r = window.location.search.substr(1).match(reg);
+	if(r != null) return unescape(r[2]);
+	return null;
+}
+var userId = localStorage.getItem("xsUserId");
+var URL_PREFIX = "http://10.0.30.121/xsManage/";
+
+//toast
+function showToast(value) {
+	var html = '<div class="toast">' +
+		'<div class="toast_value">' + value + '</div>' +
+		'</div>'
+	$("body").append(html)
+	$(".toast").fadeIn(300);
+	setTimeout(function() {
+		$(".toast").fadeOut(300, function() {
+			$(this).remove()
+		});
+	}, 1500)
+}

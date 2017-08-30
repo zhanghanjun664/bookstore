@@ -32,9 +32,10 @@ html, body {
   padding-left: 0.26667rem;
   list-style: none;
   text-indent: 2em;
-  line-height: 1.6; }
+  line-height: 1.6;
+  padding-bottom: 0.53333rem; }
 
-.p3_box > li {
+.p3_box > p {
   margin-bottom: 0.26667rem; }
 
 .part4 {
