@@ -1,10 +1,3 @@
-function GetQueryString(name) {
-	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-	var r = window.location.search.substr(1).match(reg);
-	if(r != null) return unescape(r[2]);
-	return null;
-}
-
 var id = GetQueryString("id");
 var length = 0;
 ajax({
@@ -40,12 +33,20 @@ ajax({
 
 //开始阅读
 $(".go_detail").on("click", function(){
+	if(!length){
+		showToast("暂无章节")
+		return
+	}
 	var chapterId = 1;
-  location.href = "detail.html"+location.search+"&chapterId="+chapterId+"&length="+length
+  location.href = "detail.html"+location.search+"&chapterId="+chapterId
 })
 
 //全部目录
 $(".go_catalog").on("click", function(){
+	if(!length){
+		showToast("暂无章节")
+		return
+	}
   location.href = "catalog.html"+location.search
 })
 

@@ -1,5 +1,6 @@
 var demo = $(".p3_item").clone();
 $(".p3_item").remove();
+//精彩推荐
 ajax({
 	type:"POST",
 	url: REST_PRRFIX + "/api/index/highlights.json",
@@ -9,7 +10,7 @@ ajax({
 		if(data.data.list.length){
 			data.data.list.forEach(function(item){
 				var demos = demo.clone();
-				demos.attr("data-id", item.bookTypeId)
+				demos.attr("data-id", item.id)
 				demos.find(".p3_item_a img").attr("src", URL_PREFIX+item.coverUrl)
 				demos.find(".p3_item_c").text(item.title)
 				demos.find(".p3_item_d").text(showSize(item.context, 55))
@@ -21,6 +22,23 @@ ajax({
 	}
 })
 
+//热门搜索
+ajax({
+	type:"POST",
+	url: REST_PRRFIX + "/api/index/hot/search.json",
+	dataType:'json',
+	success:function(data){
+		console.log(data)
+		if(data.data.list.length){
+			var html = "";
+			data.data.list.forEach(function(item){
+				html += "<li data-id="+item.id+">"+item.title+"</li>"
+			})
+			$(".part2_1_box").html(html);
+			
+		}
+	}
+})
 
 function loadData(str){
 	ajax({
@@ -36,7 +54,7 @@ function loadData(str){
 				$(".part4 .p3_box").html("")
 				data.data.list.forEach(function(item){
 					var demos = demo.clone();
-					demos.attr("data-id", item.bookTypeId);
+					demos.attr("data-id", item.id);
 					demos.find(".p3_item_a img").attr("src",URL_PREFIX+item.coverUrl);
 					demos.find(".p3_item_c").text(item.title);
 					demos.find(".p3_item_d").text(showSize(item.context, 55));
@@ -90,4 +108,10 @@ $(".p2_btn").on("touchstart", function(){
   
   
   
+})
+
+//热门搜索
+$(".part2_1_box").on("click", 'li', function(){
+	var id = $(this).attr('data-id');
+	location.href = "../common/catalog.html?id="+id
 })

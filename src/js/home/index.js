@@ -1,3 +1,23 @@
+//阅读历史
+ajax({
+	url: REST_PRRFIX + '/api/index/list/history.json',
+	type:"POST",
+	dataType:"json",
+	data:{type:2, userId: userId,current:0, pageSize:1},
+	success: function(data){
+		console.log(data)
+		if(data.data.list.length){
+			$(".p2_history .p2_history_c").text(data.data.list[0].title)
+			$(".p2_history").attr({
+				"data-id": data.data.list[0].bookId,
+				"data-chapterId": data.data.list[0].chapterId
+			})
+		}else{
+				$(".p2_history").hide();
+		}
+	}
+})
+
 //首页接口
 ajax({
 	url: REST_PRRFIX + '/api/index/do.json',
@@ -62,7 +82,7 @@ $(".swiper-slide").remove();
 function bannerRender(data){
 	data.forEach(function(item,index){
 	  var demo = bannerDemo.clone();
-	  demo.attr("data-id",item.bookTypeId);
+	  demo.attr("data-id",item.id);
 	  demo.find(".banner_a").attr("src",URL_PREFIX+item.coverUrl);
 	  demo.find(".banner_c").text(item.title);
 	  demo.find(".banner_d").text(showSize(item.context,50)) ;
@@ -82,11 +102,11 @@ function bannerRender(data){
 function recommendRender(data){
 	data.forEach(function(item,index){
 		if(index<3){
-			$(".p3_item").eq(index).attr("data-id", item.bookTypeId);
+			$(".p3_item").eq(index).attr("data-id", item.id);
 			$(".p3_item").eq(index).find("img").attr("src",URL_PREFIX+item.coverUrl);
 			$(".p3_item").eq(index).find("div").text(item.title);
 		}else{
-			$(".p3_list li").eq(index-3).text(item.title).attr("data-id", item.bookTypeId);
+			$(".p3_list li").eq(index-3).text(item.title).attr("data-id", item.id);
 		}
 		
 	})
@@ -96,12 +116,12 @@ function recommendRender(data){
 function girlRender(data){
 	data.forEach(function(item,index){
 		if(index<1){
-			$(".part4 .p4_box").attr("data-id", item.bookTypeId);
+			$(".part4 .p4_box").attr("data-id", item.id);
 			$(".part4 .p4_box_a img").attr("src", URL_PREFIX+item.coverUrl);
 			$(".part4 .p4_box_c").text(item.title);
 			$(".part4 .p4_box_d").text(showSize(item.context,55));
 		}else{
-			$(".part4 .p3_list li").eq(index-1).text(item.title).attr("data-id", item.bookTypeId);
+			$(".part4 .p3_list li").eq(index-1).text(item.title).attr("data-id", item.id);
 		}
 		
 	})
@@ -111,12 +131,12 @@ function girlRender(data){
 function girl2Render(data){
 	data.forEach(function(item,index){
 		if(index<1){
-			$(".part5 .p4_box").attr("data-id", item.bookTypeId);
+			$(".part5 .p4_box").attr("data-id", item.id);
 			$(".part5 .p4_box_a img").attr("src", URL_PREFIX+item.coverUrl);
 			$(".part5 .p4_box_c").text(item.title);
 			$(".part5 .p4_box_d").text(showSize(item.context,55));
 		}else{
-			$(".part5 .p3_list li").eq(index-1).text(item.title).attr("data-id", item.bookTypeId);
+			$(".part5 .p3_list li").eq(index-1).text(item.title).attr("data-id", item.id);
 		}
 		
 	})
@@ -126,12 +146,12 @@ function girl2Render(data){
 function boyRender(data){
 	data.forEach(function(item,index){
 		if(index<1){
-			$(".part6 .p4_box").attr("data-id", item.bookTypeId);
+			$(".part6 .p4_box").attr("data-id", item.id);
 			$(".part6 .p4_box_a img").attr("src", URL_PREFIX+item.coverUrl);
 			$(".part6 .p4_box_c").text(item.title);
 			$(".part6 .p4_box_d").text(showSize(item.context,55));
 		}else{
-			$(".part6 .p3_list li").eq(index-1).text(item.title).attr("data-id", item.bookTypeId);
+			$(".part6 .p3_list li").eq(index-1).text(item.title).attr("data-id", item.id);
 		}
 		
 	})
@@ -141,12 +161,12 @@ function boyRender(data){
 function boy2Render(data){
 	data.forEach(function(item,index){
 		if(index<1){
-			$(".part7 .p4_box").attr("data-id", item.bookTypeId);
+			$(".part7 .p4_box").attr("data-id", item.id);
 			$(".part7 .p4_box_a img").attr("src", URL_PREFIX+item.coverUrl);
 			$(".part7 .p4_box_c").text(item.title);
 			$(".part7 .p4_box_d").text(showSize(item.context,55));
 		}else{
-			$(".part7 .p3_list li").eq(index-1).text(item.title).attr("data-id", item.bookTypeId);
+			$(".part7 .p3_list li").eq(index-1).text(item.title).attr("data-id", item.id);
 		}
 		
 	})
@@ -155,7 +175,7 @@ function boy2Render(data){
 //限免
 function freeRender(data){
 	data.forEach(function(item,index){
-		$(".p8_item").eq(index).attr("data-id", item.bookTypeId)
+		$(".p8_item").eq(index).attr("data-id", item.id)
 		$(".p8_item").eq(index).find(".p8_item_b").attr("src", URL_PREFIX+item.coverUrl)
 		$(".p8_item").eq(index).find(".p8_item_b").text(item.title)
 	})
@@ -225,4 +245,11 @@ $("#banner").on("click", ".swiper-slide", function(){
 $(".p3_list li,.p4_box,.p3_item,.p8_item").on("click", function(){
 	var id = $(this).attr("data-id");
   location.href = "../common/cover.html?id="+id
+})
+
+//阅读历史
+$(".p2_history").on("click", function(){
+	var id = $(this).attr("data-id"),
+			chapterId = $(this).attr("data-chapterId");
+	location.href = "../common/detail.html?id="+id+"&chapterId="+chapterId
 })

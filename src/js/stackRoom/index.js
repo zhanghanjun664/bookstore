@@ -56,7 +56,7 @@ function getData(){
 				$(".noData").hide();
 				data.data.list.forEach(function(item){
 					var demos = demo.clone();
-					demos.attr("data-id", item.bookTypeId)
+					demos.attr("data-id", item.id)
 					demos.find(".p3_item_a img").attr("src", item.coverUrl)
 					demos.find(".p3_item_c").text(item.title)
 					demos.find(".p3_item_d").text(showSize(item.context,55))
@@ -108,6 +108,6 @@ $(".status > div").on("touchend", function(){
 })
 
 $(".p3_box").on("click", "li", function(){
-  var id = $(this).attr("id");
+  var id = $(this).attr("data-id");
   location.href = "../common/cover.html?id="+id
 })

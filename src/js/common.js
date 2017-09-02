@@ -114,7 +114,7 @@ function ajax(config) {
 			//登录失效
 			if(data.code == 1) {
 				showToast(data.errMsg)
-			} else if(data.code == 0) {
+			} else {
 				config.success(data);
 			}
 		},
@@ -137,7 +137,8 @@ function GetQueryString(name) {
 	if(r != null) return unescape(r[2]);
 	return null;
 }
-var userId = localStorage.getItem("xsUserId");
+//var userId = localStorage.getItem("xsUserId");
+var userId = "testtest";
 var URL_PREFIX = "http://10.0.30.121/xsManage/";
 
 //toast
@@ -152,4 +153,16 @@ function showToast(value) {
 			$(this).remove()
 		});
 	}, 1500)
+}
+
+//时间转换
+function formatDate(str){
+	var sDate = new Date(str);
+	var y = sDate.getFullYear();
+	var m = sDate.getMonth()+1 < 10 ? "0"+(sDate.getMonth()+1) : sDate.getMonth()+1;
+	var d = sDate.getDate() < 10 ? "0"+sDate.getDate() : sDate.getDate();
+	var H = sDate.getHours() < 10 ? "0"+sDate.getDate() : sDate.getHours();
+	var M = sDate.getMinutes() < 10 ? "0"+sDate.getMinutes() : sDate.getMinutes();
+	var S = sDate.getSeconds() < 10 ? "0"+sDate.getSeconds() : sDate.getSeconds();
+	return y+"-"+m+"-"+d+" "+H+":"+M+":"+S
 }

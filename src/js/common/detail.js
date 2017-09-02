@@ -1,6 +1,6 @@
 var id = GetQueryString("id");
 var chapterId = GetQueryString("chapterId");
-var length = GetQueryString("length");
+var length = 0;
 var xsStyle = "";
 if(!localStorage.getItem("xsStyle")){
 	xsStyle = {
@@ -16,6 +16,31 @@ setTimeout(function(){
 	$(".p3_box p").css("font-size",xsStyle.fontSize);
 },100)
 
+//检查是否签到
+ajax({
+	type:"post",
+	url: REST_PRRFIX + "/api/index/sign/get.json",
+	data:{userId: userId},
+	dataType:"json",
+	success:function(data){
+		if(data.code = 0){
+			//未签到
+			ajax({
+				type:"post",
+				url: REST_PRRFIX + "/api/index/sign.json",
+				data:{userId: userId},
+				dataType:"json",
+				success:function(data){
+					console.log(data)
+					showToast("签到成功，赠送50书币")
+				}
+			})
+			
+		}
+	}
+})
+
+//拿阅读内容
 ajax({
 	type: 'POST',
 	url: REST_PRRFIX + '/api/index/chapter/context.json',
@@ -26,6 +51,10 @@ ajax({
 		$(".part1").text("第"+data.data.chapter.chapterId+"章："+data.data.chapter.chapterName)
 		$(".part2 > img").attr("src", URL_PREFIX+data.data.chapter.coverUrl)
 		$(".p3_box").html(data.data.chapter.context)
+		length = data.data.maxChapterId;
+		
+		$(".p2_img").attr("src", data.data.img);//小说封面
+		$(".p2_name").text(data.data.title);//小说名
 		
 		if(chapterId == 1){
 			$(".p4_prev").addClass("hidden");
@@ -38,12 +67,12 @@ ajax({
 
 //上一章
 $(".p4_prev").on("click", function(){
-	location.href = 'detail.html?id='+id+"&chapterId="+(Number(chapterId)-1)+"&length="+length
+	location.href = 'detail.html?id='+id+"&chapterId="+(Number(chapterId)-1)
 })
 
 //下一章
 $(".p4_next").on("click", function(){
-	location.href = 'detail.html?id='+id+"&chapterId="+(Number(chapterId)+1)+"&length="+length
+	location.href = 'detail.html?id='+id+"&chapterId="+(Number(chapterId)+1)
 })
 
 
@@ -104,10 +133,28 @@ $(".show_background").click(function(){
 
 //添加书签
 $(".btn_addMark").click(function(){
-  showToast("添加成功")
-  $(".p5_box").slideUp(100,function(){
-    hideNav()
-  });
+	var data = {
+		userId:userId,
+		bookId: id,
+		chapterId: chapterId,
+		context: ""
+	}
+	ajax({
+		type:"post",
+		url: REST_PRRFIX + "/api/index/bookmark/set.json",
+		data:data,
+		dataType:"json",
+		success:function(data){
+			console.log(data)
+			showToast("添加成功")
+			$(".p5_box").slideUp(100,function(){
+			  hideNav()
+			});
+		}
+	})
+	
+	
+	
   
 })
 

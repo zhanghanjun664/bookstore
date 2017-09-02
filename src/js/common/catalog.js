@@ -31,5 +31,5 @@ ajax({
 //跳转
 $(".p3_box").on("click", "li", function(){
 	var chapterId = $(this).attr("data-chapterId");
-	location.href = "detail.html?id="+id+"&chapterId="+chapterId+"&length="+length
+	location.href = "detail.html?id="+id+"&chapterId="+chapterId
 })
