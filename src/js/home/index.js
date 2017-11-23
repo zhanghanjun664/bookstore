@@ -56,22 +56,75 @@ ajax({
 		boy2Render(boy2Arr)
 	}
 })
+
+var freeDemo = $(".p8_item").clone();
+$(".p8_item").remove()
+var countdown = 0;//倒计时
+
 //限免接口
 ajax({
 	url: REST_PRRFIX + '/api/index/classify.json',
 	type:"POST",
 	dataType:"json",
-	data:{bookTypeId:2,pageSize:6,sexType:0,bookStatusEnd:"",current:0},
+	data:{bookTypeId:"",pageSize:6,sexType:"",bookStatusEnd:2,current:0},
 	success: function(data){
 		console.log(data)
 		if(!data.data.list.length){
 			$(".part8").hide();
 		}else{
+			countdown = data.data.list[0].freeTimeEnd
+			setInterval(show, 1000)
 			freeRender(data.data.list)			
 		}
 	}
 })
 
+//倒计时
+function leftTimer(year, month, day, hour, minute, second) { 
+  var leftTime = (new Date(year, month - 1, day, hour, minute, second)) - (new Date()); //计算剩余的毫秒数 
+   
+  var days = parseInt(leftTime / 1000 / 60 / 60 / 24, 10); //计算剩余的天数 
+   
+  var hours = parseInt(leftTime / 1000 / 60 / 60 % 24, 10); //计算剩余的小时 
+   
+  var minutes = parseInt(leftTime / 1000 / 60 % 60, 10); //计算剩余的分钟 
+   
+  var seconds = parseInt(leftTime / 1000 % 60, 10); //计算剩余的秒数 
+   
+  days = checkTime(days); 
+  hours = checkTime(hours); 
+  minutes = checkTime(minutes); 
+  seconds = checkTime(seconds); 
+//var timer = setInterval("leftTimer(2017,11,11,11,11,11)", 1000); 
+}
+
+function checkTime(i) { //将0-9的数字前面加上0，例1变为01 
+   
+  if(i < 10)  {  
+    i = "0" + i; 
+  } 
+  return i;
+}
+
+function show() {
+	console.log(111111)
+	var currentDate = new Date();
+	var EndTime = new Date(countdown);
+
+	var days = EndTime - currentDate;
+	EndTimeMsg = parseInt(days / 1000); //精确到秒
+	
+  var h = Math.floor(EndTimeMsg / 60 / 60);
+  var m = Math.floor((EndTimeMsg - h * 60 * 60) / 60);
+  var s = Math.floor((EndTimeMsg - h * 60 * 60 - m * 60));
+  var str = checkTime(parseInt(h / 24))+" 天 "+checkTime(h%24)+" 时 "+checkTime(m)+" 分 "+checkTime(s)+" 秒"
+  $(".countDown").text("还剩: "+str)
+  EndTimeMsg--;
+  if(EndTimeMsg <= 0) {
+      $(".countDown").text("还剩: 00 天 00 时 00 分 00 秒")
+  }
+  console.log()
+}
 
 
 
@@ -175,9 +228,14 @@ function boy2Render(data){
 //限免
 function freeRender(data){
 	data.forEach(function(item,index){
-		$(".p8_item").eq(index).attr("data-id", item.id)
-		$(".p8_item").eq(index).find(".p8_item_b").attr("src", URL_PREFIX+item.coverUrl)
-		$(".p8_item").eq(index).find(".p8_item_b").text(item.title)
+//		$(".p8_item").eq(index).attr("data-id", item.id)
+//		$(".p8_item").eq(index).find(".p8_item_b").attr("src", URL_PREFIX+item.coverUrl)
+//		$(".p8_item").eq(index).find(".p8_item_b").text(item.title)
+		var demos = freeDemo.clone();
+		demos.attr("data-id", item.id)
+		demos.find(".p8_item_b").attr("src", URL_PREFIX+item.coverUrl)
+		demos.find(".p8_item_d").text(item.title)
+		$(".p8_box").append(demos)
 	})
 }
 
@@ -187,53 +245,8 @@ function freeRender(data){
 
 
 
-//倒计时
-function leftTimer(year, month, day, hour, minute, second) { 
-  var leftTime = (new Date(year, month - 1, day, hour, minute, second)) - (new Date()); //计算剩余的毫秒数 
-   
-  var days = parseInt(leftTime / 1000 / 60 / 60 / 24, 10); //计算剩余的天数 
-   
-  var hours = parseInt(leftTime / 1000 / 60 / 60 % 24, 10); //计算剩余的小时 
-   
-  var minutes = parseInt(leftTime / 1000 / 60 % 60, 10); //计算剩余的分钟 
-   
-  var seconds = parseInt(leftTime / 1000 % 60, 10); //计算剩余的秒数 
-   
-  days = checkTime(days); 
-  hours = checkTime(hours); 
-  minutes = checkTime(minutes); 
-  seconds = checkTime(seconds); 
-  var timer = setInterval("leftTimer(2017,11,11,11,11,11)", 1000); 
-  console.log(days + "天" + hours + "小时" + minutes + "分" + seconds + "秒")
-}
 
-function checkTime(i) { //将0-9的数字前面加上0，例1变为01 
-   
-  if(i < 10)  {  
-    i = "0" + i; 
-  } 
-  return i;
-}
-//leftTimer(2017,11,11,11,11,11)
-var currentDate = new Date();
-var EndTime = new Date((currentDate.getTime()+1000*60*60));
 
-var days = EndTime - currentDate;
-EndTimeMsg = parseInt(days / 1000); //精确到秒
-
-function show() {
-  var h = Math.floor(EndTimeMsg / 60 / 60);
-  var m = Math.floor((EndTimeMsg - h * 60 * 60) / 60);
-  var s = Math.floor((EndTimeMsg - h * 60 * 60 - m * 60));
-  var str = checkTime(parseInt(h / 24))+" 天 "+checkTime(h%24)+" 时 "+checkTime(m)+" 分 "+checkTime(s)+" 秒"
-  $(".countDown").text("还剩: "+str)
-  EndTimeMsg--;
-  if(EndTimeMsg <= 0) {
-      $(".countDown").text("还剩: 00 天 00 时 00 分 00 秒")
-  }
-  console.log()
-}
-setInterval(show, 1000)
 
 //banner跳转
 $("#banner").on("click", ".swiper-slide", function(){

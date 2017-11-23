@@ -16,9 +16,12 @@ html,body{
 .part1{
     text-align: center;
     padding: rem(30) rem(120) rem(40);
+//  font-size: 38px;
     font-size: rem(38);
     letter-spacing: rem(2);
-    color: #dd7b22;
+//  color: #dd7b22;
+    color: #666666;
+    font-weight: bold;
 }
 
 .part2{
@@ -38,14 +41,27 @@ html,body{
 }
 
 .p3_box{
-    padding-left: rem(20);
+    padding: 0 rem(35);
+//  padding-right: 65px;
     list-style: none;
     text-indent: 2em;
-    line-height: 1.6;
+//  line-height: 54px;
+    line-height: rem(54);
     padding-bottom: rem(40);
+    color: #666666;
+//  font-size: 30px;
+    font-size: rem(30);
+    font-family: "微软雅黑";
 }
 .p3_box > p{
     margin-bottom: rem(20);
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    -moz-user-select: none;
 }
 
 .part4{

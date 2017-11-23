@@ -37,3 +37,9 @@
 
 .part2 .noBorder {
   border: none; }
+
+.expDate {
+  color: #000; }
+
+.p2_item_a > img {
+  width: 0.53333rem; }

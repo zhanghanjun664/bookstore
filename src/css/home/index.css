@@ -40,7 +40,8 @@
   color: #10AEFF; }
 
 .p2_history > img {
-  margin-right: 0.13333rem; }
+  margin-right: 0.13333rem;
+  width: 0.48rem; }
 
 .p2_history_c {
   margin-left: 0.21333rem; }
@@ -75,7 +76,7 @@
 .banner_c {
   color: #000;
   font-size: 0.48rem;
-  margin-bottom: 0.4rem; }
+  margin-bottom: 0.26667rem; }
 
 .banner_d {
   line-height: 1.6; }
@@ -208,3 +209,6 @@
 
 .part9_b {
   line-height: 1.6; }
+
+.title_a {
+  width: 0.48rem; }

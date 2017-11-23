@@ -15,3 +15,6 @@
   background-color: #72c3ec;
   color: #EEEEEE;
   display: none; }
+
+.part2_a > img {
+  width: 50%; }

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body {
   height: 100%; }
 
@@ -11,7 +12,8 @@ html, body {
   padding: 0.4rem 1.6rem 0.53333rem;
   font-size: 0.50667rem;
   letter-spacing: 0.02667rem;
-  color: #dd7b22; }
+  color: #666666;
+  font-weight: bold; }
 
 .part2 {
   display: flex;
@@ -29,14 +31,24 @@ html, body {
   color: #10AEFF; }
 
 .p3_box {
-  padding-left: 0.26667rem;
+  padding: 0 0.46667rem;
   list-style: none;
   text-indent: 2em;
-  line-height: 1.6;
-  padding-bottom: 0.53333rem; }
+  line-height: 0.72rem;
+  padding-bottom: 0.53333rem;
+  color: #666666;
+  font-size: 0.4rem;
+  font-family: "微软雅黑"; }
 
 .p3_box > p {
-  margin-bottom: 0.26667rem; }
+  margin-bottom: 0.26667rem;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -moz-user-select: none; }
 
 .part4 {
   display: flex;

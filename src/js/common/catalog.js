@@ -13,15 +13,14 @@ ajax({
 		length = data.data.list.length;
 		var html = "";
 		data.data.list.forEach(function(item,index){
-			if(index<4){
-				var className = "";
-				if(item.chapterStatus == 2){
-					className = "hidden";
-				}else{
-					className = item.chapterPrice > 0 ? "show": "hidden"
-				}
-				html += '<li data-chapterId='+item.chapterId+'>第'+item.chapterId+'章 '+item.chapterName+'<span class='+className+'><span class="iconfont icon-zuanshi"></span> '+item.chapterPrice+'</span></li>'
+			var className = "";
+			if(item.chapterStatus == 2){
+				className = "hidden";
+			}else{
+				className = item.chapterPrice > 0 ? "show": "hidden"
 			}
+			html += '<li data-chapterId='+item.chapterId+'>第'+item.chapterId+'章 '+item.chapterName+'<span class='+className+'><span class="iconfont icon-zuanshi"></span> '+item.chapterPrice+'</span></li>'
+
 		})
 		$(".p3_box").append(html)
 		

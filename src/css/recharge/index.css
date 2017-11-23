@@ -15,6 +15,12 @@
 .p2_b > span {
   color: #fe981b; }
 
+.p2_b > strong {
+  color: #000; }
+
+.yearVip {
+  display: none; }
+
 .part3 {
   padding: 0.26667rem; }
 

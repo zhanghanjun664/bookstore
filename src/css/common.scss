@@ -225,3 +225,23 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     border-radius: 10px;
     font-size: rem(30);
 }
+
+//收费章节显示二维码
+.showQRCode{
+    text-align: center;
+    padding-top: rem(300);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.showQRCode > div{
+   margin-top: rem(20);
+   font-size: rem(36);
+}
+
+//年费会员
+.yearVip{
+    display: none;
+}
