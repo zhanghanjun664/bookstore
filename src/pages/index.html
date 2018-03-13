@@ -190,7 +190,7 @@
 				
 			});
 			var params = {
-				branchno: 0030360881,
+				branchno: "0030360881",
 				agentno: "GZ01",
 				areaCode: "",
 				userName: ""
@@ -210,6 +210,7 @@
 					showToast("验证码错误")
 					return false
 				}
+				params.userName = tel;
 				return true
 				
 			}
@@ -260,7 +261,7 @@
 				var params2 = {
 					msgType: 4001,
 					mobile: $(".tel").val().trim(),
-					branchno: 0030360881,
+					branchno: "0030360881",
 					arg1: activeCode
 				}
 				$.ajax({
