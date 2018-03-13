@@ -22,3 +22,8 @@ $(".go_mark").on("click", function(){
 $(".go_stackRoom").on("click", function(){
   location.href = "../stackRoom/index.html"
 })
+
+//送书币
+$(".go_giveGold").on("click", function(){
+	location.href = "giveGold.html"
+})

@@ -15,6 +15,12 @@
 .p2_b > span {
   color: #fe981b; }
 
+.p2_b > strong {
+  color: #000; }
+
+.yearVip {
+  display: none; }
+
 .part3 {
   padding: 0.26667rem; }
 
@@ -37,6 +43,12 @@
   border-radius: 0.13333rem;
   text-align: center;
   line-height: 1.5; }
+
+.p3_box > .active {
+  border: 0.02667rem solid #fe981b; }
+
+.p3_box > .active > div {
+  color: #fe981b !important; }
 
 .p3_box > div > div {
   font-size: 0.37333rem;

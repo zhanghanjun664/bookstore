@@ -71,6 +71,12 @@
   line-height: 1.06667rem;
   border-bottom: 0.02667rem solid #eeeeee; }
 
+.part5_box span {
+  color: #ff73b9; }
+
+.part5_box .iconfont {
+  margin-left: 0.26667rem; }
+
 .part5_catalog {
   line-height: 1.06667rem;
   text-align: center;

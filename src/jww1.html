@@ -31,6 +31,7 @@
 			canvas.width = canvasWidth*2;
 			canvas.height = canvasHeight*2;
 			ctx.scale(2, 2)
+<<<<<<< HEAD
 //			var imgBox = [
 //				'img/1.jpg',
 //				'img/2.jpg',
@@ -43,6 +44,13 @@
         'img/test2.png',
         'img/icon_gift.png',
       ]
+=======
+			var imgBox = [
+				'img/test.jpg',
+				'img/test2.png',
+				'img/icon_mark.png',
+			]
+>>>>>>> eb152f7171b06c15d351343c18024e2399b5d74b
 			var progress = 0;
 			
 			for (var i = 0; i<imgBox.length; i++) {
@@ -87,7 +95,10 @@
 				
 				//礼物动起来
 				for (var i = 0; i < preBox.length; i++) {
+<<<<<<< HEAD
 				  //超出左边删除
+=======
+>>>>>>> eb152f7171b06c15d351343c18024e2399b5d74b
 					if(preBox[i].x < (-1)*preBox[i].width){
 						preBox.splice(i,1);
 						i--;
@@ -104,6 +115,7 @@
 						
 					}
 					
+<<<<<<< HEAD
 					//被夹中
 					if(preBox[i].hadCatch){
 						preBox[i].x = (canvasWidth - preBox[i].width)/2
@@ -112,6 +124,16 @@
 						  preBox.splice(i,1);
 						  i--;
 						  continue
+=======
+					//向上拉
+					if(preBox[i].hadCatch){
+						preBox[i].x = (canvasWidth - preBox[i].width)/2
+						preBox[i].y--;
+						if(preBox[i].y < 0){
+							preBox.splice(i,1);
+							i--;
+							continue
+>>>>>>> eb152f7171b06c15d351343c18024e2399b5d74b
 						}
 						
 					}else{
@@ -126,7 +148,17 @@
 				
 				window.requestAnimationFrame(move)
 			}
+<<<<<<< HEAD
 				
+=======
+//			document.onclick = function(){
+//				if(!move){
+//					move()
+//				}else{
+//					move = null					
+//				}
+//			}
+>>>>>>> eb152f7171b06c15d351343c18024e2399b5d74b
 			var catchPresent = false;
 			$("button").click(function(){
 				catchPresent = !catchPresent;

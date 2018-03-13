@@ -50,6 +50,7 @@
 }
 .p2_history > img{
     margin-right: rem(10);
+    width: rem(36);
 }
 .p2_history_c{
     margin-left: rem(16);
@@ -85,7 +86,7 @@
 .banner_c{
     color: #000;
     font-size: rem(36);
-    margin-bottom: rem(30);
+    margin-bottom: rem(20);
 }
 .banner_d{
     line-height: 1.6;
@@ -158,7 +159,6 @@
     float: left;
     width: rem(200);
     height: 100%;
-    background-color: red;
     overflow: hidden;
 }
 .p4_box_a > img{
@@ -227,4 +227,9 @@
 }
 .part9_b{
     line-height: 1.6;
+}
+
+//补充
+.title_a{
+    width: rem(36);
 }

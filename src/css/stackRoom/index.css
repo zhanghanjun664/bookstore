@@ -84,3 +84,6 @@
 
 .p3_item_d {
   line-height: 1.6; }
+
+.noData {
+  display: none; }
