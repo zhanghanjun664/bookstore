@@ -180,7 +180,6 @@
 			
 			jQuery.getScript("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js", function() {
 				province = remote_ip_info["province"];
-				console.log(remote_ip_info)
 				for (var i in areaCode) {
 					if(areaCode[i][0].indexOf(remote_ip_info["city"]) != -1){
 						params.areaCode = areaCode[i][1]
@@ -191,7 +190,7 @@
 			});
 			var params = {
 				branchno: "0030360881",
-				agentno: "GZ01",
+				agentno: "4401060202",
 				areaCode: "",
 				userName: ""
 			}
@@ -206,12 +205,23 @@
 					showToast("请输入正确的手机号码")
 					return false
 				}
-				if(activeCode != code){
-					showToast("验证码错误")
+				if(!code){
+					showToast("请输入验证码")
 					return false
 				}
+				
 				params.userName = tel;
-				return true
+				if(activeCode){
+					if(activeCode != code){
+						showToast("验证码错误")
+						return false
+					}else{
+						return true
+						
+					}
+				}else{
+					showToast("请获取验证码")
+				}
 				
 			}
 			
@@ -220,18 +230,20 @@
 				if(!testInfo()){
 					return
 				}
-				console.log("pass!!!")
 				zc_sending = true;
 				$.ajax({
 					type:"get",
 					url:"http://mapi.nocarddata.com/ssReg.do",
 					data: params,
+					dataType: "json",
 					success: function(data){
-						console.log(params)
-						console.log(data)
-						var android = data.androidUrl,
-						ios = data.iosUrl;
-						location.href = "download.html?android="+android+"&ios="+ios
+						if(data.respCode != "00"){
+							showToast(data.message)
+						}else{
+							var android = data.androidUrl,
+							ios = data.iosUrl;
+							location.href = "download.html?android="+android+"&ios="+ios
+						}
 						
 					},
 					error: function(){
@@ -251,13 +263,16 @@
 			
 			//发送验证码
 			$(".btn_getCode").click(function(){
-				console.log(codeStatus.sending)
+				var tel = $(".tel").val().trim()
+				if(!checkInfo("mobile", tel)){
+					showToast("请输入正确的手机号码")
+					return false
+				}
 				if(codeStatus.sending){
 					return
 				}
 				codeStatus.sending = true;
 				activeCode = rnd(1000, 9999)
-				console.log(activeCode)
 				var params2 = {
 					msgType: 4001,
 					mobile: $(".tel").val().trim(),
@@ -268,9 +283,14 @@
 					type:"get",
 					url:"http://mapi.nocarddata.com/message.do",
 					data: params2,
+					dataType: "json",
 					success: function(data){
-						console.log(params)
-						console.log(data)
+						if(data.respCode == 00){
+							showToast("发送成功")
+						}else{
+							showToast("发送失败,请稍后再试")
+							
+						}
 					},
 					error: function(){
 						showToast("请检查网络状况")
