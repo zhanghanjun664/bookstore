@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>闪刷互联</title>
+		<title>天天领红包</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<style type="text/css">
 			* {
@@ -40,272 +40,237 @@
 				font-size: 14px;
 			}
 			
-			.imgs {
+			html,
+			body {
 				width: 100%;
+				height: 100%;
 			}
 			
-			input::-webkit-input-placeholder {
-				color: #999999;
-			}
-			
-			input:-moz-placeholder {
-				color: #999999;
-			}
-			
-			input {
-				border: none;
-				outline: none;
-				font-size: 14px;
-				flex: 1;
+			.wrap {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				background-color: #10AEFF;
+				text-align: center;
+				position: relative;
 			}
 			
 			.p1 {
-				position: relative;
-				/*margin-bottom: 30px;*/
+				width: 90%;
+				/*margin: 0 auto;*/
+				padding-top: 60px;
 			}
 			
-			.box {
+			.btn {
+				width: 100px;
 				position: absolute;
-				bottom: 0;
-				transform: translateY(-18%);
-				background-color: #fff;
-				border-radius: 5px;
-				left: 15px;
-				right: 15px;
+				bottom: 100px;
+				left: 0;
+				right: 0;
 				margin: auto;
-				padding: 20px;
-				box-shadow: 0 0 20px 0 gray;
 			}
 			
-			.item {
-				display: flex;
-				align-items: center;
-				height: 44px;
-			}
-			
-			.btn_confirm {
-				line-height: 44px;
-				color: #333333;
-				text-align: center;
-				border-radius: 5px;
-				background-color: #FFD100;
-				margin-top: 10px;
-				font-weight: bold;
-			}
-			
-			.icon {
-				width: 14px;
-				margin-right: 20px;
-			}
-			
-			.btn_getCode {
-				font-size: 14px;
-				color: #333333;
-			}
-			
-			.p2 img {
+			.modal {
 				width: 100%;
+				height: 100%;
+				position: fixed;
+				left: 0;
+				top: 0;
+				background-color: rgba(0, 0, 0, .5);
+				display: none;
+			}
+			
+			.modal_box {
+				width: 90%;
+				position: absolute;
+				left: 0;
+				right: 0;
+				margin: auto;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			
+			.modal_box img {
+				width: 100%;
+				/*position: absolute;
+				z-index: -1;
+				left: 0;
+				top: 0;*/
+			}
+			
+			.tips {
+				font-size: 18px;
+				position: absolute;
+				top: 50%;
+				width: 100%;
+				color: #fbe844;
+			}
+			
+			.tips span {
+				font-weight: bold;
+				font-size: 22px;
+			}
+			
+			.btn_use {
+				width: 60%;
+				left: 0;
+				right: 0;
+				margin: auto;
+				position: absolute;
+				bottom: 20px;
+				height: 70px;
+			}
+			/*.tips*/
+			
+			.am-toast {
+				position: fixed;
+				width: 100%;
+				z-index: 1999;
+				font-size: 14px;
+				text-align: center;
+			}
+			
+			.am-toast>span {
+				max-width: 50%;
+			}
+			
+			.am-toast{
+				height: 100%;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-pack: center;
+				-webkit-justify-content: center;
+				-ms-flex-pack: center;
+				justify-content: center;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				-ms-flex-align: center;
+				align-items: center;
+				left: 0;
+				top: 0;
+				-webkit-transform: translateZ(0.5px);
+				transform: translateZ(0.5px);
+			}
+			
+			.am-toast.am-toast-nomask {
+				position: fixed;
+				max-width: 50%;
+				width: auto;
+				left: 50%;
+				top: 50%;
+				-webkit-transform: translateZ(0.5px);
+				transform: translateZ(0.5px);
+			}
+			
+			.am-toast.am-toast-nomask .am-toast-notice {
+				-webkit-transform: translateX(-50%) translateY(-50%);
+				-ms-transform: translateX(-50%) translateY(-50%);
+				transform: translateX(-50%) translateY(-50%);
+			}
+			
+			.am-toast-notice-content .am-toast-text {
+				min-width: 60px;
+				border-radius: 3px;
+				color: #fff;
+				background-color: rgba(58, 58, 58, 0.9);
+				line-height: 1.5;
+				padding: 9px 15px;
+			}
+			
+			.am-toast-notice-content .am-toast-text.am-toast-text-icon {
+				border-radius: 0.1rem;
+				padding: 15px;
+				text-align: center;
+			}
+			
+			.am-toast-notice-content .am-toast-text.am-toast-text-icon .am-toast-text-info {
+				margin-top: 6px;
+			}
+			
+			.am-toast>span {
+				max-width: 50%;
+			}
+			.loading{
+				width: 20px;
+				height: 20px;
+				/*animation: rotates 4s linear infinite;;*/
+			}
+			.am-toast{
+				visibility: hidden;
+			}
+			@keyframes rotates{
+				from{
+					transform: rotate(0);
+				}
+				to{
+					transform: rotateZ(360deg);
+				}
 			}
 		</style>
 	</head>
 
 	<body>
-		<div class="wrap">
-			<div class="p1">
-				<img src="img/img1_1.png" class="imgs" />
-				<img src="img/img1_2.png" class="imgs" />
-				<div class="box">
-					<div class="info_box">
-						<div class="item">
-							<img src="img/icon1.png" class="icon" />
-							<input type="number" class="tel" placeholder="请输入手机号码接受邀请" />
+		<div class="am-toast am-toast-mask">
+			<span>
+				<div class="am-toast-notice am-toast-notice-closable">
+					<div class="am-toast-notice-content">
+						<div class="am-toast-text am-toast-text-icon" role="alert" aria-live="assertive">
+							<!--<div class="loading"></div>-->
+							<img src="img/loading.png" class="loading"/>
+							<div class="am-toast-text-info">loading...</div>
 						</div>
-
-						<div class="item">
-							<img src="img/icon2.png" class="icon" />
-							<input class="code" placeholder="请输入验证码" />
-							<span class="btn_getCode">获取验证码</span>
-						</div>
-
 					</div>
+		</div>
+		</span>
+		</div>
+		<div class="wrap">
+			<div></div>
+			<img src="img/top.png" alt="" class="p1" />
 
-					<div class="btn_confirm">注册领取880元投资红包</div>
+			<img src="img/btn_lottery.png" alt="" class="btn" />
+
+			<div class="modal">
+				<div class="modal_box">
+					<img src="img/gift-bg.png" class="modal_img" />
+					<div class="tips">
+						<p>恭喜您获得</p>
+						<p><span>1元</span>大红包</p>
+					</div>
+					<div class="btn_use"></div>
 
 				</div>
 			</div>
 
-			<div class="p2">
-				<img src="img/img2.png" />
-			</div>
-
 		</div>
 		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/areaCode.min.js" type="text/javascript" charset="utf-8"></script>
-	  <script type="text/javascript">
-	  	//toast
+		<!--<script src="js/areaCode.min.js" type="text/javascript" charset="utf-8"></script>-->
+		<script type="text/javascript">
+			//toast
 			function showToast(value) {
-			  var html = '<div class="toast">' +
-			    '<div class="toast_value">' + value + '</div>' +
-			    '</div>'
-			  $("body").append(html)
-			  $(".toast").fadeIn(300);
+				var html = '<div class="toast">' +
+					'<div class="toast_value">' + value + '</div>' +
+					'</div>'
+				$("body").append(html)
+				$(".toast").fadeIn(300);
 				setTimeout(function() {
-				    $(".toast").fadeOut(300, function() {
-				      $(this).remove()
-				    });
+					$(".toast").fadeOut(300, function() {
+						$(this).remove()
+					});
 				}, 1500)
 			}
-			//正则验证 type: name/email/id/mobile
-			function checkInfo(type, content){
-				var type = type ? type : ''
-				var reg = ""
-				switch (type){
-					case 'name':
-						reg = /^[\u4E00-\u9FA5]{2,4}$/;
-						break;
-					case 'email':
-						reg =  /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
-						break;
-					case 'id':
-						reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-						break;
-					default:
-						reg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/;
-						break;
-				}
-				return reg.test(content)
-			}
-			
-			
-			
-			jQuery.getScript("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js", function() {
-				province = remote_ip_info["province"];
-				for (var i in areaCode) {
-					if(areaCode[i][0].indexOf(remote_ip_info["city"]) != -1){
-						params.areaCode = areaCode[i][1]
-						return
-					}
-				}
-				
-			});
-			var params = {
-				branchno: "0030360881",
-				agentno: "4401060202",
-				areaCode: "",
-				userName: ""
-			}
-			
-			
-			var zc_sending = false;
-			var activeCode = "";
-			function testInfo(){
-				var tel = $(".tel").val().trim()
-				var code = $(".code").val().trim()
-				if(!checkInfo("mobile", tel)){
-					showToast("请输入正确的手机号码")
-					return false
-				}
-				if(!code){
-					showToast("请输入验证码")
-					return false
-				}
-				
-				params.userName = tel;
-				if(activeCode){
-					if(activeCode != code){
-						showToast("验证码错误")
-						return false
-					}else{
-						return true
-						
-					}
-				}else{
-					showToast("请获取验证码")
-				}
-				
-			}
-			
-			//注册
-			$(".btn_confirm").click(function(){
-				if(!testInfo()){
-					return
-				}
-				zc_sending = true;
-				$.ajax({
-					type:"get",
-					url:"http://mapi.nocarddata.com/ssReg.do",
-					data: params,
-					dataType: "json",
-					success: function(data){
-						if(data.respCode != "00"){
-							showToast(data.message)
-						}else{
-							var android = data.androidUrl,
-							ios = data.iosUrl;
-							location.href = "download.html?android="+android+"&ios="+ios
-						}
-						
-					},
-					error: function(){
-						showToast("请检查网络状况")
-					},
-					complete: function(){
-						zc_sending = false
-					}
-				});
+
+			$(".btn").click(function() {
+				$(".modal").show()
+//				$(".am-toast").css('visibility', 'visible')
 				
 			})
-			
-			var codeStatus = {
-				sending: false,
-				pass: false
-			}
-			
-			//发送验证码
-			$(".btn_getCode").click(function(){
-				var tel = $(".tel").val().trim()
-				if(!checkInfo("mobile", tel)){
-					showToast("请输入正确的手机号码")
-					return false
-				}
-				if(codeStatus.sending){
-					return
-				}
-				codeStatus.sending = true;
-				activeCode = rnd(1000, 9999)
-				var params2 = {
-					msgType: 4001,
-					mobile: $(".tel").val().trim(),
-					branchno: "0030360881",
-					arg1: activeCode
-				}
-				$.ajax({
-					type:"get",
-					url:"http://mapi.nocarddata.com/message.do",
-					data: params2,
-					dataType: "json",
-					success: function(data){
-						if(data.respCode == 00){
-							showToast("发送成功")
-						}else{
-							showToast("发送失败,请稍后再试")
-							
-						}
-					},
-					error: function(){
-						showToast("请检查网络状况")
-					},
-					complete: function(){
-						codeStatus.sending = false
-					}
-				});
+
+			$(".btn_use").click(function() {
+				showToast('请直接出示该红包')
 			})
-			
-			function rnd(min, max){
-				return Math.round(Math.random()*(max-min)+min)
-			}
-			
-	  </script>
+		</script>
 	</body>
 
 </html>

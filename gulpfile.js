@@ -16,7 +16,7 @@ var proxy = require('http-proxy-middleware');
 gulp.task('connect', function(){
   connect.server({
     livereload:true,
-    port:8020,
+    port:8021,
     middleware: function(){
       return [
         proxy('/rest', {
