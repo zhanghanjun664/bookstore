@@ -44,13 +44,16 @@
 			body {
 				width: 100%;
 				height: 100%;
+				/*opacity: 0.2;*/
 			}
 			
 			.wrap {
 				width: 100%;
 				height: 100%;
 				overflow: hidden;
-				background-color: #10AEFF;
+				/*background-color: #10AEFF;*/
+				background-image: url(img/bg.png);
+				background-size: 100% 100%;
 				text-align: center;
 				position: relative;
 			}
@@ -120,6 +123,35 @@
 				bottom: 20px;
 				height: 70px;
 			}
+			
+			.hb {
+				width: 90%;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				left: 0;
+				right: 0;
+				margin: auto;
+			}
+			
+			.hb2 {
+				display: none;
+			}
+			
+			.hb img {
+				width: 100%;
+			}
+			
+			.btn_open,
+			.btn_toast {
+				position: absolute;
+				left: 0;
+				right: 0;
+				margin: auto;
+				bottom: 55px;
+				width: 200px;
+				height: 40px;
+			}
 			/*.tips*/
 			
 			.am-toast {
@@ -134,7 +166,7 @@
 				max-width: 50%;
 			}
 			
-			.am-toast{
+			.am-toast {
 				height: 100%;
 				display: -webkit-box;
 				display: -webkit-flex;
@@ -172,7 +204,7 @@
 			
 			.am-toast-notice-content .am-toast-text {
 				min-width: 60px;
-				border-radius: 3px;
+				border-radius: 10px;
 				color: #fff;
 				background-color: rgba(58, 58, 58, 0.9);
 				line-height: 1.5;
@@ -180,7 +212,7 @@
 			}
 			
 			.am-toast-notice-content .am-toast-text.am-toast-text-icon {
-				border-radius: 0.1rem;
+				border-radius: 4px;
 				padding: 15px;
 				text-align: center;
 			}
@@ -192,19 +224,22 @@
 			.am-toast>span {
 				max-width: 50%;
 			}
-			.loading{
+			
+			.loading {
 				width: 20px;
 				height: 20px;
 				/*animation: rotates 4s linear infinite;;*/
 			}
-			.am-toast{
+			
+			.am-toast {
 				visibility: hidden;
 			}
-			@keyframes rotates{
-				from{
+			
+			@keyframes rotates {
+				from {
 					transform: rotate(0);
 				}
-				to{
+				to {
 					transform: rotateZ(360deg);
 				}
 			}
@@ -222,31 +257,28 @@
 							<div class="am-toast-text-info">loading...</div>
 						</div>
 					</div>
-		</div>
-		</span>
+				</div>
+			</span>
 		</div>
 		<div class="wrap">
-			<div></div>
-			<img src="img/top.png" alt="" class="p1" />
+			<div class="hb">
+				<img src="img/hb1.png" class="hb1" />
+				<div class="btn_open"></div>
+			</div>
 
-			<img src="img/btn_lottery.png" alt="" class="btn" />
-
-			<div class="modal">
-				<div class="modal_box">
-					<img src="img/gift-bg.png" class="modal_img" />
-					<div class="tips">
-						<p>恭喜您获得</p>
-						<p><span>1元</span>大红包</p>
-					</div>
-					<div class="btn_use"></div>
-
-				</div>
+			<div class="hb">
+				<img src="img/hb2.png" class="hb2" />
+				<div class="btn_toast"></div>
 			</div>
 
 		</div>
 		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 		<!--<script src="js/areaCode.min.js" type="text/javascript" charset="utf-8"></script>-->
 		<script type="text/javascript">
+			//设置openid
+			var openId = GetQueryString("user") || localStorage.getItem("openId") || '';
+			localStorage.setItem("openId", openId)
+
 			//toast
 			function showToast(value) {
 				var html = '<div class="toast">' +
@@ -260,16 +292,58 @@
 					});
 				}, 1500)
 			}
+			function GetQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) return unescape(r[2]);
+				return null;
+			}
 
 			$(".btn").click(function() {
 				$(".modal").show()
-//				$(".am-toast").css('visibility', 'visible')
-				
+				//				$(".am-toast").css('visibility', 'visible')
+
 			})
 
-			$(".btn_use").click(function() {
-				showToast('请直接出示该红包')
+			//拆红包
+			$(".btn_open").click(function() {
+				showLoading()
+				$.ajax({
+					type: "post",
+					url: "http://gzh.jr.yueming888.com/wyWChat/ffc/fansReward.do",
+					data: {
+						openId: localStorage.getItem('openId'),
+						reward: 1
+					},
+					dataType:'json',
+					success(data) {
+						console.log(data)
+						hideLoading()
+						$(".hb1").hide()
+						$(".hb2").show()
+					},
+					error(err) {
+						console.log(err)
+					},
+					complete() {
+						console.log('完成')
+					}
+				});
+
 			})
+
+			$(".btn_toast").click(function() {
+				showToast('请到店出示该红包')
+			})
+
+			//显示loading
+			function showLoading() {
+				$(".am-toast").css('visibility', 'visible')
+			}
+			//隐藏loading
+			function hideLoading() {
+				$(".am-toast").css('visibility', 'hidden')
+			}
 		</script>
 	</body>
 
